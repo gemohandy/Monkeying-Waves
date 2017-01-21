@@ -6,6 +6,7 @@ public class cannonMouseTrack : MonoBehaviour {
 
 	Transform[] cannonHead;
 	Vector3 mousePosition;
+	public AudioClip boom;
 	float xDist;
 	float zDist;
 	float lineDist;
@@ -36,12 +37,12 @@ public class cannonMouseTrack : MonoBehaviour {
 		cannonHead[2].Rotate(new Vector3(0, Mathf.Rad2Deg * Mathf.Asin(lineDist/launchMagnitude/Physics.gravity.magnitude)/2-cannonPitch, 0));
 		cannonPitch = Mathf.Rad2Deg * Mathf.Asin (lineDist / launchMagnitude / Physics.gravity.magnitude) / 2;
 		if (Input.GetMouseButtonDown(0)) {
-			Debug.Log ("Test");
+			AudioSource soundMaker = this.gameObject.GetComponent<AudioSource> ();
+			soundMaker.Play ();
 			Rigidbody ballClone = Instantiate (cannonball, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
 			ballClone.velocity = new Vector3 (-Mathf.Cos (Mathf.Deg2Rad * (360-cannonHead[1].rotation.eulerAngles.x)) * Mathf.Cos (Mathf.Deg2Rad * this.transform.rotation.eulerAngles.y) * launchMagnitude,
 				Mathf.Sin (Mathf.Deg2Rad * (360-cannonHead[1].rotation.eulerAngles.x)) * launchMagnitude* correctionConst,
 				Mathf.Cos (Mathf.Deg2Rad * (360-cannonHead[1].rotation.eulerAngles.x)) * Mathf.Sin (Mathf.Deg2Rad * this.transform.rotation.eulerAngles.y) * launchMagnitude)* correctionConst;
 		}
-		Debug.Log (cannonHead [1].rotation.eulerAngles);
 	}
 }
