@@ -21,22 +21,18 @@ public class cannonMouseTrack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Physics.Raycast (Camera.main.ScreenPointToRay(Input.mousePosition), out Hit)) {
-			Debug.Log ("Hello!");
-		};
-		Debug.Log (mousePosition);
 		mousePosition = Input.mousePosition;
-		mousePosition.z = Hit.distance;
+		mousePosition.z = 2;
 		mousePosition = Camera.main.ScreenToWorldPoint (mousePosition);
-		xDist = mousePosition.x - this.transform.localPosition.x;
-		zDist = mousePosition.z - this.transform.localPosition.z;
-		lineDist = Mathf.Sqrt (xDist * xDist + zDist * zDist);
+		Physics.Raycast (Camera.main.transform.position, mousePosition - Camera.main.transform.position, out Hit);
+		xDist = Hit.point.x - this.transform.localPosition.x;
+		zDist = Hit.point.z - this.transform.localPosition.z;
+		lineDist = Mathf.Min (Mathf.Sqrt (xDist * xDist + zDist * zDist), 98f);;
 		this.transform.Rotate (new Vector3 (0,0, Mathf.Rad2Deg * Mathf.Acos(-xDist/lineDist) - curRot));
-		curRot = Mathf.Rad2Deg * Mathf.Acos(-xDist/lineDist);
+		curRot = this.transform.rotation.eulerAngles.y;
 		cannonHead[1].Rotate(new Vector3(0, Mathf.Rad2Deg * Mathf.Asin(lineDist/launchMagnitude/Physics.gravity.magnitude)/2-cannonPitch, 0));
 		cannonHead[2].Rotate(new Vector3(0, Mathf.Rad2Deg * Mathf.Asin(lineDist/launchMagnitude/Physics.gravity.magnitude)/2-cannonPitch, 0));
 		cannonPitch = Mathf.Rad2Deg * Mathf.Asin (lineDist / launchMagnitude / Physics.gravity.magnitude) / 2;
-
-		Debug.Log (Mathf.Asin((lineDist/launchMagnitude)/Physics.gravity.magnitude));
+		Debug.Log (this.transform.rotation.eulerAngles);
 	}
 }
