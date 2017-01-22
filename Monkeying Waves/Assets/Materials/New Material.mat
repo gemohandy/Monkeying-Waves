@@ -66,7 +66,7 @@ Material:
     - first:
         name: _LeftTex
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 45115d600e7674d8a877b381c033356d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -96,7 +96,7 @@ Material:
     - first:
         name: _RightTex
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 45115d600e7674d8a877b381c033356d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
