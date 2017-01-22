@@ -12,13 +12,16 @@ public class cannonBallHit : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision hit){
-		Debug.Log (hit.collider.gameObject.layer);
 		if (hit.collider.gameObject.layer == 4) {
 			AudioSource soundMaker = this.gameObject.AddComponent<AudioSource>();
 			soundMaker.clip = splash;
 			soundMaker.volume = 0.3f;
 			soundMaker.Play ();
 			this.GetComponents<Rigidbody>()[0].isKinematic = true;
+			waveControl[] startWaves = hit.collider.GetComponent<waveControl> ().neighbours;
+			foreach (waveControl wave in startWaves) {
+				StartCoroutine (wave.WaveGenerated (4, hit.collider.GetComponent<waveControl> ()));
+			}
 			StartCoroutine (destroySelf());
 		}
 	}
