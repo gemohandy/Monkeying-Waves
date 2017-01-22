@@ -6,6 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Levels/Menu.unity
+  - enabled: 1
     path: Assets/Levels/CannonTest.unity
   - enabled: 1
     path: Assets/Levels/Level2.unity

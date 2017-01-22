@@ -26,7 +26,11 @@ public class monkeyMonitor : MonoBehaviour {
 			win = win && hoop.grabbed;
 		}
 		if (win) {
-			SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
+			if (SceneManager.sceneCountInBuildSettings-1 != SceneManager.GetActiveScene().buildIndex) {
+				SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
+			} else {
+				SceneManager.LoadScene (0);
+			}
 		}
 	}
 }
