@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\ButtonFunctions.cs" />
      <Compile Include="Assets\Scripts\cannonBallHit.cs" />
      <Compile Include="Assets\Scripts\cannonMouseTrack.cs" />
      <Compile Include="Assets\Scripts\monkeyHit.cs" />

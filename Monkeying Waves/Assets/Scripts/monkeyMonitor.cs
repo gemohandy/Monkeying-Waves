@@ -13,8 +13,8 @@ public class monkeyMonitor : MonoBehaviour {
 	void Start () {
 		all = SceneManager.GetActiveScene().GetRootGameObjects();
 		foreach (GameObject thing in all) {
-			if (thing.GetComponent<floatPreserve> () != null) {
-				preservers.Add (thing.GetComponent<floatPreserve> ());
+			if (thing.GetComponentsInChildren<floatPreserve> () != null) {
+				preservers.AddRange(thing.GetComponentsInChildren<floatPreserve> ());
 			}
 		}
 	}
@@ -26,7 +26,11 @@ public class monkeyMonitor : MonoBehaviour {
 			win = win && hoop.grabbed;
 		}
 		if (win) {
-			Debug.Log ("WINNER!");
+			if (SceneManager.sceneCountInBuildSettings-1 != SceneManager.GetActiveScene().buildIndex) {
+				SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
+			} else {
+				SceneManager.LoadScene (0);
+			}
 		}
 	}
 }

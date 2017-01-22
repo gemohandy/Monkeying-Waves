@@ -11,6 +11,7 @@ public class floatPreserve : MonoBehaviour {
 	float start;
 	int grabTime = 0;
 	public bool grabbed;
+	public bool testing;
 
 	// Use this for initialization
 	void Start () {
@@ -22,12 +23,15 @@ public class floatPreserve : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (grabTime < 10) {
+		if (grabTime < 5) {
 			curPos = wave.transform.position;
 			curPos.y += 44;
 			this.transform.position = curPos;
 			if (Mathf.Abs (this.transform.position.y - start - goal) <= 0.01) {
 				grabTime++;
+			}
+			if (this.transform.position.y != start) {
+				Debug.Log (this.transform.position.y - start);
 			}
 		} else {
 			grabbed = true;
